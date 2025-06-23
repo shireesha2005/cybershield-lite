@@ -31,4 +31,4 @@ CyberShield Lite offers an easy-to-use cybersecurity assessment:
 - Sample score sheet
 - Auto-generated PDF report
 
-## 📦 Folder Structure
+
