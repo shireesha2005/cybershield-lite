@@ -1,0 +1,13 @@
+🛡️ CyberShield Lite - Security Report
+
+Business Website: {{Website}}
+HTTPS Secure? : {{HTTPS}}
+Leaked Emails? : {{Leaked}}
+Dorking Issues: {{Dorking}}
+Security Score: {{Score}} / 100
+
+Recommendations:
+{{Recommendations}}
+
+Stay safe,
+Team CyberShield Lite

@@ -1,0 +1,37 @@
+function generateReports() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Responses");
+  Logger.log(sheet); // Debug check
+
+  if (!sheet) {
+    Logger.log("Sheet not found!");
+    return;
+  }
+
+  var data = sheet.getDataRange().getValues();
+  var docTemplateId = "1uhzu7tsWPdnn4saMrVlHguJFw3nFwWZgqgvQjMjfD7I";
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var email = row[0]; // Email (Column A)
+    if (!email || !email.includes("@")) continue; // Skip invalid emails
+
+    var score = row[1]; // Score (Column B)
+    var name = row[2] || "User"; // Name (Column C)
+
+    var docCopy = DriveApp.getFileById(docTemplateId).makeCopy("Report for " + name);
+    var doc = DocumentApp.openById(docCopy.getId());
+    var body = doc.getBody();
+
+    body.replaceText("{{NAME}}", name);
+    body.replaceText("{{SCORE}}", score);
+    doc.saveAndClose();
+
+    var url = docCopy.getUrl();
+
+    MailApp.sendEmail({
+      to: email,
+      subject: "Your CyberShield Lite Security Report",
+      body: Hi ${name},\n\nHere is your report:\n${url},
+    });
+  }
+}
